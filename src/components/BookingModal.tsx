@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 import { useEffect } from "react";
+import { routesList } from "./RoutesSection";
 
 export default function BookingModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -95,11 +96,17 @@ export default function BookingModal() {
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-xs font-medium text-white/60">Vehicle Type</label>
-                  <select className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#7b61ff] transition-colors appearance-none">
-                    <option value="sedan">Sedan (Swift Dzire)</option>
-                    <option value="suv">SUV (Innova)</option>
-                    <option value="traveller">Tempo Traveller</option>
-                    <option value="bus">Mini Bus</option>
+                  <select className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#7b61ff] transition-colors appearance-none scrollbar-thin scrollbar-thumb-white/20">
+                    <option value="" disabled selected>Select a vehicle...</option>
+                    <option value="sedan" className="py-2">Sedan (Swift Dzire)</option>
+                    <option value="suv" className="py-2">SUV (Innova)</option>
+                    <option value="traveller" className="py-2">Tempo Traveller</option>
+                    <option value="bus" className="py-2">Mini Bus</option>
+                    <optgroup label="Popular Routes & Vehicles" className="mt-2 text-white/50">
+                      {routesList.map((route, i) => (
+                        <option key={i} value={route} className="py-2 text-white">{route}</option>
+                      ))}
+                    </optgroup>
                   </select>
                 </div>
               </div>

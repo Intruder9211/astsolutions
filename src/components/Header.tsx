@@ -58,8 +58,8 @@ export default function Header() {
         
         {/* Left: Brand */}
         <Link href="/" className="flex items-center gap-2 group shrink-0">
-          <div className="w-6 h-6 rounded bg-ocean-500 flex items-center justify-center text-white font-bold text-xs">
-            A
+          <div className="w-9 h-9 flex items-center justify-center bg-white rounded-full p-0.5 shadow-sm">
+            <img src="/images/ast_logo.png" alt="AST Solutions Logo" className="w-full h-full object-contain rounded-full" />
           </div>
           <span className="text-lg font-display font-medium text-white tracking-wide">
             AST Solutions

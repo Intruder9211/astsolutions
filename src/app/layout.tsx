@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import OrbitSocialIcons from "@/components/OrbitSocialIcons";
 import BookingModal from "@/components/BookingModal";
+import SiteLoader from "@/components/SiteLoader";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -30,6 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${fraunces.variable} ${inter.variable} antialiased`}>
+        <SiteLoader />
         <SmoothScroll>
           <Header />
           {children}
