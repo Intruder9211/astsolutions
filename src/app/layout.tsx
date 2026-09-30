@@ -19,8 +19,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Beach Travel",
-  description: "Escape to the Coast",
+  title: "AST Solutions | India's Premium Tempo Traveller Service",
+  description: "Experience the best and fastest tempo traveller and cab services in India with AST Solutions.",
 };
 
 export default function RootLayout({

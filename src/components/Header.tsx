@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { Home, Info, Car, Bus, Map, Grid, Image as ImageIcon, Phone, X } from "lucide-react";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -10,9 +11,23 @@ export default function Header() {
 
   const navLinks = [
     { name: "About", href: "/about" },
-    { name: "Fleet", href: "/cars" },
+    { name: "Cars", href: "/cars" },
+    { name: "Tempo", href: "/tempo" },
+    { name: "Urbania", href: "/urbania" },
     { name: "Services", href: "/services", hasMegaMenu: true },
-    { name: "Gallery", href: "/photo" },
+    { name: "Gallery", href: "/gallery" },
+    { name: "Contact", href: "/contact" },
+  ];
+
+  const mobileNavLinks = [
+    { name: "Home", href: "/", icon: <Home className="w-[14px] h-[14px]" /> },
+    { name: "About", href: "/about", icon: <Info className="w-[14px] h-[14px]" /> },
+    { name: "Cars", href: "/cars", icon: <Car className="w-[14px] h-[14px]" /> },
+    { name: "Tempo", href: "/tempo", icon: <Bus className="w-[14px] h-[14px]" /> },
+    { name: "Urbania", href: "/urbania", icon: <Map className="w-[14px] h-[14px]" /> },
+    { name: "Services", href: "/services", icon: <Grid className="w-[14px] h-[14px]" /> },
+    { name: "Gallery", href: "/gallery", icon: <ImageIcon className="w-[14px] h-[14px]" /> },
+    { name: "Contact", href: "/contact", icon: <Phone className="w-[14px] h-[14px]" /> },
   ];
 
   // 6 Distinct SVG Icons for each service
@@ -41,18 +56,19 @@ export default function Header() {
   );
 
   const megaMenuContent = [
-    { title: "Delhi to Agra Taxi", desc: "Premium outstation cabs", icon: <CarIcon /> },
-    { title: "Delhi to Manali", desc: "Group tours & holidays", icon: <MapFoldIcon /> },
-    { title: "Innova on Rent", desc: "Luxury SUV rentals", icon: <KeyIcon /> },
-    { title: "12 Seater Traveller", desc: "Spacious family trips", icon: <TransitIcon /> },
-    { title: "15 Seater Traveller", desc: "Extended group travel", icon: <UsersIcon /> },
-    { title: "Mini Bus 20 Seater", desc: "Corporate & event transit", icon: <BusIcon /> },
+    { title: "Delhi to Agra Taxi", href: "/services/delhi-to-agra-taxi", desc: "Premium outstation cabs", icon: <CarIcon /> },
+    { title: "Delhi to Manali", href: "/services/delhi-to-manali", desc: "Group tours & holidays", icon: <MapFoldIcon /> },
+    { title: "Innova on Rent", href: "/services/innova-on-rent", desc: "Luxury SUV rentals", icon: <KeyIcon /> },
+    { title: "12 Seater Traveller", href: "/services/12-seater-traveller", desc: "Spacious family trips", icon: <TransitIcon /> },
+    { title: "15 Seater Traveller", href: "/services/15-seater-traveller", desc: "Extended group travel", icon: <UsersIcon /> },
+    { title: "Mini Bus 20 Seater", href: "/services/mini-bus-20-seater", desc: "Corporate & event transit", icon: <BusIcon /> },
   ];
 
   return (
-    <header className="fixed top-6 inset-x-0 z-50 flex justify-center px-4">
+    <>
+      <header className="fixed top-6 inset-x-0 z-50 flex justify-center px-4">
       <div 
-        className="w-full max-w-5xl bg-[#111111]/90 backdrop-blur-md border border-white/10 rounded-full px-5 py-2.5 flex items-center justify-between shadow-2xl relative"
+        className="w-full max-w-7xl bg-[#111111]/90 backdrop-blur-md border border-white/10 rounded-full px-6 py-3 flex items-center justify-between gap-4 xl:gap-8 shadow-2xl relative"
         onMouseLeave={() => setHoveredMenu(null)}
       >
         
@@ -150,8 +166,9 @@ export default function Header() {
                 <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                   {megaMenuContent.map((item, idx) => (
                     <Link 
-                      href="/services" 
+                      href={item.href} 
                       key={idx} 
+                      onClick={() => { setIsMobileMenuOpen(false); setHoveredMenu(null); }}
                       className="group flex gap-4 p-3 rounded-xl hover:bg-white/5 hover:-translate-y-1 transition-all duration-300"
                     >
                       <div className="shrink-0 mt-1 w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-[#7b61ff] group-hover:scale-110 group-hover:bg-[#7b61ff]/20 transition-all duration-300">
@@ -180,5 +197,74 @@ export default function Header() {
         </AnimatePresence>
       </div>
     </header>
+
+    {/* Off-canvas Mobile Menu */}
+    <AnimatePresence>
+      {isMobileMenuOpen && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[999] md:hidden"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed top-0 right-0 h-full w-[80%] max-w-[320px] bg-[#111111] z-[1000] shadow-2xl flex flex-col md:hidden border-l border-white/10"
+          >
+            <div className="flex items-center justify-between p-6 border-b border-white/10">
+              <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 group">
+                <div className="w-8 h-8 flex items-center justify-center bg-white rounded-full p-0.5 shadow-sm">
+                  <img src="/images/ast_logo.png" alt="AST Solutions Logo" className="w-full h-full object-contain rounded-full" />
+                </div>
+                <span className="text-base font-display font-medium text-white tracking-wide">
+                  AST Solutions
+                </span>
+              </Link>
+              <button 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-white/70 hover:text-white transition-colors bg-white/5 p-2 rounded-full"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto py-6 px-4 flex flex-col gap-2">
+              {mobileNavLinks.map((link, idx) => (
+                <Link
+                  key={idx}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition-all font-body text-sm"
+                >
+                  <div className="text-[#7b61ff]">
+                    {link.icon}
+                  </div>
+                  {link.name}
+                </Link>
+              ))}
+              
+              <div className="mt-8 px-4">
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    window.dispatchEvent(new CustomEvent('openBookingModal'));
+                  }}
+                  className="w-full bg-[#7b61ff] hover:bg-[#694deb] text-white text-sm font-medium px-5 py-3 rounded-full transition-colors duration-200"
+                >
+                  Book a Cab
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  </>
   );
 }

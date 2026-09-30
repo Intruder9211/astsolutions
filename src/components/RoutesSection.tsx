@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { X, Phone, Calendar, User, MapPin } from "lucide-react";
+import { motion } from "framer-motion";
+import { MapPin } from "lucide-react";
+import Link from "next/link";
 
 export const routesList = [
   "6 Seater Tempo Traveller on Rent",
@@ -52,13 +52,6 @@ export const routesList = [
 ];
 
 export default function RoutesSection() {
-  const [selectedRoute, setSelectedRoute] = useState<string | null>(null);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert(`Enquiry submitted for: ${selectedRoute}`);
-    setSelectedRoute(null);
-  };
 
   return (
     <section className="py-32 bg-sand-100 px-4 relative z-20 border-t border-sand-200">
@@ -99,111 +92,31 @@ export default function RoutesSection() {
           className="bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-sand-200"
         >
           {/* Inner scroll container */}
-          <div className="h-[320px] overflow-y-auto overscroll-auto custom-scrollbar pr-2 md:pr-4">
+          <div 
+            className="h-[320px] overflow-y-auto custom-scrollbar pr-2 md:pr-4"
+            data-lenis-prevent="true"
+          >
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-              {routesList.map((route, i) => (
-                <motion.button
-                  key={i}
-                  whileHover={{ scale: 1.02, backgroundColor: "#f8fafc" }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => setSelectedRoute(route)}
-                  className="flex items-center justify-between text-left w-full border border-sand-200 rounded-xl px-4 py-3 text-sm md:text-base font-medium text-navy-700 hover:text-ocean-500 hover:border-ocean-500/30 transition-colors group bg-white shadow-sm"
-                >
-                  <span className="truncate pr-4">{route}</span>
-                  <ChevronRightIcon className="w-4 h-4 text-sand-300 group-hover:text-ocean-500 flex-shrink-0 transition-colors" />
-                </motion.button>
-              ))}
+              {routesList.map((route, i) => {
+                const slug = route.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+                return (
+                  <Link
+                    key={i}
+                    href={`/services/${slug}`}
+                    className="flex items-center justify-between text-left w-full border border-sand-200 rounded-xl px-4 py-3 text-sm md:text-base font-medium text-navy-700 hover:text-ocean-500 hover:border-ocean-500/30 transition-colors group bg-white shadow-sm hover:scale-[1.02] active:scale-[0.98] hover:bg-[#f8fafc]"
+                  >
+                    <span className="truncate pr-4">{route}</span>
+                    <ChevronRightIcon className="w-4 h-4 text-sand-300 group-hover:text-ocean-500 flex-shrink-0 transition-colors" />
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </motion.div>
 
       </div>
 
-      {/* Booking Modal Popup */}
-      <AnimatePresence>
-        {selectedRoute && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-navy-900/40 backdrop-blur-sm p-4"
-            onClick={() => setSelectedRoute(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.95, y: 20, opacity: 0 }}
-              animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.95, y: 20, opacity: 0 }}
-              transition={{ type: "spring", bounce: 0.3 }}
-              className="bg-white w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden relative"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Modal Header */}
-              <div className="bg-sand-100 p-6 md:p-8 border-b border-sand-200 relative">
-                <button 
-                  onClick={() => setSelectedRoute(null)}
-                  className="absolute top-6 right-6 text-navy-900/40 hover:text-navy-900 transition-colors bg-white rounded-full p-1 shadow-sm"
-                >
-                  <X size={20} />
-                </button>
-                <h3 className="text-2xl font-display font-bold text-navy-900 pr-8">
-                  Book Your Ride
-                </h3>
-                <p className="text-ocean-500 font-medium mt-2 flex items-center gap-2">
-                  <span className="bg-ocean-500/10 px-3 py-1 rounded-full text-sm">
-                    {selectedRoute}
-                  </span>
-                </p>
-              </div>
-
-              {/* Modal Body: Form */}
-              <div className="p-6 md:p-8">
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-navy-900 mb-1">Your Name</label>
-                    <div className="relative">
-                      <User className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-900/40" size={18} />
-                      <input required type="text" placeholder="John Doe" className="w-full pl-10 pr-4 py-3 bg-sand-100 border-none rounded-xl focus:ring-2 focus:ring-ocean-500 outline-none transition-all text-navy-900" />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-navy-900 mb-1">Phone Number</label>
-                    <div className="relative">
-                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-900/40" size={18} />
-                      <input required type="tel" placeholder="+91 9876543210" className="w-full pl-10 pr-4 py-3 bg-sand-100 border-none rounded-xl focus:ring-2 focus:ring-ocean-500 outline-none transition-all text-navy-900" />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-navy-900 mb-1">PickUp Date</label>
-                      <div className="relative">
-                        <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-900/40" size={18} />
-                        <input required type="date" className="w-full pl-10 pr-4 py-3 bg-sand-100 border-none rounded-xl focus:ring-2 focus:ring-ocean-500 outline-none transition-all text-navy-900" />
-                      </div>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-navy-900 mb-1">DropOff Date</label>
-                      <div className="relative">
-                        <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-900/40" size={18} />
-                        <input required type="date" className="w-full pl-10 pr-4 py-3 bg-sand-100 border-none rounded-xl focus:ring-2 focus:ring-ocean-500 outline-none transition-all text-navy-900" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="pt-4 flex flex-col sm:flex-row gap-3">
-                    <button type="submit" className="flex-1 bg-navy-900 text-white font-bold py-3.5 rounded-xl hover:bg-ocean-500 transition-colors shadow-md">
-                      Request Quote
-                    </button>
-                    <a href="tel:+919717806764" className="flex-1 bg-green-500 text-white font-bold py-3.5 rounded-xl hover:bg-green-600 transition-colors shadow-md flex items-center justify-center gap-2">
-                      <Phone size={18} /> Call Now
-                    </a>
-                  </div>
-                </form>
-              </div>
-
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Booking Modal Popup removed, now using dedicated pages */}
     </section>
   );
 }

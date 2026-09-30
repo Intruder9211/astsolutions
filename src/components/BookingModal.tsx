@@ -96,8 +96,8 @@ export default function BookingModal() {
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-xs font-medium text-white/60">Vehicle Type</label>
-                  <select className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#7b61ff] transition-colors appearance-none scrollbar-thin scrollbar-thumb-white/20">
-                    <option value="" disabled selected>Select a vehicle...</option>
+                  <select defaultValue="" className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#7b61ff] transition-colors appearance-none scrollbar-thin scrollbar-thumb-white/20">
+                    <option value="" disabled>Select a vehicle...</option>
                     <option value="sedan" className="py-2">Sedan (Swift Dzire)</option>
                     <option value="suv" className="py-2">SUV (Innova)</option>
                     <option value="traveller" className="py-2">Tempo Traveller</option>
