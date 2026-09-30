@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import Link from "next/link";
 
 const allImages = [
   "/images/gallery/1.webp",
@@ -52,26 +52,18 @@ export default function GallerySection() {
     <section className="py-32 bg-white relative overflow-hidden">
       <div className="max-w-[90rem] mx-auto px-4">
         {/* Main Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
+        <div
           className="text-center mb-24"
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-navy-900 tracking-tight">
             Immerse Yourself In Premium Travel
           </h2>
-        </motion.div>
+        </div>
 
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
           
           {/* Left Text Content */}
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+          <div
             className="w-full lg:w-1/4 space-y-8 z-10"
           >
             <p className="text-lg text-navy-700 font-body leading-relaxed relative">
@@ -81,23 +73,19 @@ export default function GallerySection() {
               Connecting You with Comfort That Moves You. A Journey Through Premium Travel.
             </p>
             
-            <button 
-              onClick={() => window.dispatchEvent(new CustomEvent('openBookingModal'))}
-              className="flex items-center gap-4 text-navy-900 font-bold hover:text-ocean-500 transition-colors group"
+            <Link 
+              href="/gallery"
+              className="flex items-center gap-4 text-navy-900 font-bold hover:text-ocean-500 transition-colors group w-fit"
             >
               Explore Now
               <span className="bg-sand-200 w-10 h-10 rounded-full flex items-center justify-center group-hover:bg-ocean-500 group-hover:text-white transition-all">
                 &rarr;
               </span>
-            </button>
-          </motion.div>
+            </Link>
+          </div>
 
           {/* Center Masonry Collage (Cross/Diamond Layout using all 24 images) */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
+          <div
             className="w-full lg:w-2/4"
           >
             <div className="flex justify-center gap-2 md:gap-3 lg:gap-4 items-center">
@@ -143,14 +131,10 @@ export default function GallerySection() {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right Text Content */}
-          <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+          <div
             className="w-full lg:w-1/4 flex flex-col justify-between h-[400px] z-10"
           >
             <div className="text-right">
@@ -160,7 +144,7 @@ export default function GallerySection() {
 
             <div className="relative mt-auto text-right">
               {/* Spinning Text Effect Approximation */}
-              <div className="hidden lg:block absolute -top-24 right-0 w-32 h-32 animate-[spin_10s_linear_infinite]">
+              <div className="absolute -top-24 right-0 w-32 h-32 animate-[spin_10s_linear_infinite] opacity-30 lg:opacity-100">
                 <svg viewBox="0 0 100 100" width="120" height="120">
                   <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
                   <text className="text-[10px] tracking-widest font-bold fill-navy-900/50 uppercase">
@@ -173,18 +157,15 @@ export default function GallerySection() {
                 Where Every <span className="text-ocean-500">Ride</span> Tells a Story.
               </h4>
             </div>
-          </motion.div>
+          </div>
 
         </div>
       </div>
 
       {/* Lightbox Popup */}
-      <AnimatePresence>
+      
         {selectedIdx !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+          <div
             onClick={() => setSelectedIdx(null)}
             className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-md p-4"
           >
@@ -205,12 +186,8 @@ export default function GallerySection() {
             </button>
 
             {/* Current Image */}
-            <motion.img
+            <img
               key={selectedIdx}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.2 }}
               src={allImages[selectedIdx]}
               alt="Gallery Fullscreen"
               className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
@@ -229,9 +206,10 @@ export default function GallerySection() {
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/70 font-medium tracking-widest bg-white/10 px-4 py-2 rounded-full backdrop-blur-md">
               {selectedIdx + 1} / {allImages.length}
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
+      
     </section>
   );
 }
+

@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
 import Link from "next/link";
 
@@ -59,11 +58,7 @@ export default function RoutesSection() {
         
         {/* Header */}
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-12 gap-6">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
           >
             <span className="inline-flex items-center gap-2 bg-[#f59e0b]/10 text-[#f59e0b] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4">
               <MapPin size={14} /> PAN INDIA NETWORK
@@ -71,24 +66,16 @@ export default function RoutesSection() {
             <h2 className="text-3xl md:text-5xl font-display font-bold text-navy-900">
               Popular City Cabs & Tempo Traveller Routes
             </h2>
-          </motion.div>
-          <motion.p 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+          </div>
+          <p
             className="text-navy-700/60 font-medium text-sm md:text-base max-w-sm text-left md:text-right"
           >
             Click any destination or vehicle capacity to explore fares & booking options
-          </motion.p>
+          </p>
         </div>
 
         {/* Scrollable Grid of Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+        <div
           className="bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-sand-200"
         >
           {/* Inner scroll container */}
@@ -112,7 +99,7 @@ export default function RoutesSection() {
               })}
             </div>
           </div>
-        </motion.div>
+        </div>
 
       </div>
 
@@ -128,3 +115,4 @@ function ChevronRightIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+

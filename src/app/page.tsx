@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { Map, Users, Plane, Briefcase, Heart, CreditCard, Headphones, Car } from "lucide-react";
 import WhatWeOfferScroll from "@/components/WhatWeOfferScroll";
 import BestCabServices from "@/components/BestCabServices";
@@ -20,14 +20,11 @@ const servicesList = [
 ];
 
 export default function Home() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
+  
+  
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  
+  
 
   const stats = [
     { value: "500+", label: "Premium Vehicles" },
@@ -46,13 +43,12 @@ export default function Home() {
   ];
 
   return (
-    <main className="relative min-h-screen bg-sand-100 overflow-hidden" ref={containerRef}>
+    <main className="relative min-h-screen bg-sand-100 overflow-hidden" >
       
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         {/* Parallax Background */}
-        <motion.div 
-          style={{ y, opacity }} 
+        <div 
           className="absolute inset-0 z-0"
         >
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.2)_0%,_rgba(0,0,0,0.95)_100%)] z-10" />
@@ -65,42 +61,30 @@ export default function Home() {
           >
             <source src="/videos/14726179_2160_3840_30fps.mp4" type="video/mp4" />
           </video>
-        </motion.div>
+        </div>
 
         {/* Hero Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 w-full flex flex-col items-center text-center mt-20">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          <div
             className="inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-medium mb-6"
           >
             Redefining Travel Across Pan-India
-          </motion.div>
+          </div>
           
-          <motion.h1 
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          <h1
             className="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white leading-[1.1] tracking-tight mb-8 max-w-4xl"
           >
             Experience India in <br />
             <span className="text-[#7b61ff] italic">Unmatched Comfort.</span>
-          </motion.h1>
+          </h1>
           
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          <p
             className="text-lg md:text-xl text-white/80 max-w-2xl mb-12 font-body"
           >
             From luxury city transfers to scenic outstation tours, experience unparalleled comfort and safety with our premium fleet and verified professional chauffeurs.
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          <div
             className="flex flex-col sm:flex-row gap-4"
           >
             <a href="tel:+919717806764" className="bg-white text-navy-900 hover:bg-sand-100 font-medium px-8 py-4 rounded-full transition-colors duration-300">
@@ -110,7 +94,7 @@ export default function Home() {
               Explore Fleet
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </Link>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -174,21 +158,15 @@ export default function Home() {
           {/* Stats Content */}
           <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, i) => (
-              <motion.div 
+              <div 
                 key={i}
-                initial={{ opacity: 0, scale: 0.3, rotateY: -180, z: -100 }}
-                whileInView={{ opacity: 1, scale: 1, rotateY: 0, z: 0 }}
-                whileHover={{ scale: 1.4, rotateX: 20, rotateY: 25, z: 100, textShadow: "0px 15px 30px rgba(0,0,0,0.4)" }}
-                viewport={{ once: false, margin: "-50px" }}
-                transition={{ duration: 1, delay: i * 0.15, type: "spring", bounce: 0.6 }}
                 className="text-center cursor-pointer"
-                style={{ transformStyle: "preserve-3d", perspective: 1000 }}
               >
-                <motion.div animate={{ y: [0, -20, 0] }} transition={{ duration: 3 + i, repeat: Infinity, ease: "easeInOut" }}>
+                <div>
                   <div className="text-4xl md:text-5xl font-display font-bold text-navy-900 mb-2 drop-shadow-lg">{stat.value}</div>
                   <div className="text-sm font-medium text-navy-700/60 uppercase tracking-wider">{stat.label}</div>
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -196,13 +174,7 @@ export default function Home() {
 
       {/* About Introduction */}
       <section className="py-32 px-4 max-w-5xl mx-auto text-center overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0, y: 150, rotateX: 45, scale: 0.8 }}
-          whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
-          whileHover={{ scale: 1.02 }}
-          viewport={{ once: false, margin: "-100px" }}
-          transition={{ duration: 1.2, type: "spring", bounce: 0.5 }}
-          style={{ transformStyle: "preserve-3d", perspective: 1000 }}
+        <div
         >
           <h2 className="text-3xl md:text-5xl font-display font-bold text-navy-900 mb-8 leading-tight">
             A Legacy of <span className="text-ocean-500">Safety & Trust.</span>
@@ -210,7 +182,7 @@ export default function Home() {
           <p className="text-lg md:text-xl text-navy-900/70 leading-relaxed font-body">
             Founded with a vision to redefine ground mobility, AST Solutions operates a meticulously maintained fleet of premium vehicles across Delhi NCR, Ghaziabad, Noida, and Gurgaon. Whether you require a swift city transfer in a prime sedan or a cross-country tour in an Ultra-Luxury Urbania, our highly trained chauffeurs ensure every mile is perfectly orchestrated.
           </p>
-        </motion.div>
+        </div>
 
 
       </section>
@@ -227,31 +199,20 @@ export default function Home() {
       {/* Offerings Grid */}
       <section className="py-32 bg-[#050505] text-white px-4 border-t border-white/5">
         <div className="max-w-7xl mx-auto">
-          <motion.div 
-            initial={{ opacity: 0, x: -200, rotateY: 45, scale: 0.8 }}
-            whileInView={{ opacity: 1, x: 0, rotateY: 0, scale: 1 }}
-            viewport={{ once: false, margin: "-100px" }}
-            transition={{ duration: 1, type: "spring", bounce: 0.5 }}
+          <div
             className="mb-20"
-            style={{ transformStyle: "preserve-3d", perspective: 1000 }}
           >
             <h2 className="text-4xl md:text-6xl font-display font-medium tracking-tight mb-6">Built for every journey.</h2>
             <p className="text-[#94a3b8] text-xl max-w-2xl">Reliable, world-class transport solutions designed perfectly around your itinerary.</p>
-          </motion.div>
+          </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {offerings.map((item, i) => (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, y: 150, rotateX: 60, scale: 0.6 }}
-                whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
-                whileHover={{ scale: 1.15, rotateY: i % 2 === 0 ? 15 : -15, rotateX: 10, z: 120, boxShadow: "0 40px 60px rgba(0,0,0,0.8)" }}
-                viewport={{ once: false, margin: "-50px" }}
-                transition={{ duration: 1, delay: i * 0.15, type: "spring", bounce: 0.6 }}
                 className="group relative bg-[#0d0d0d] border border-white/5 rounded-[2rem] overflow-hidden flex flex-col h-[420px] shadow-[0_0_30px_rgba(0,0,0,0.5)] cursor-pointer"
-                style={{ transformStyle: "preserve-3d", perspective: 1000 }}
               >
-                <motion.div animate={{ y: [0, -15, 0] }} transition={{ duration: 4 + (i * 0.5), repeat: Infinity, ease: "easeInOut" }} className="w-full h-full relative">
+                <div className="w-full h-full relative">
                 {/* Spotlight Gradient - only on first card to mimic screenshot, or subtle on all */}
                 {i === 0 && (
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-50 z-0 pointer-events-none" />
@@ -268,16 +229,16 @@ export default function Home() {
                   <div className="transform transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-2">
                     <h3 className="text-xl font-display font-medium tracking-tight text-white">{item.title}</h3>
                   </div>
-                  <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                  <div className="grid grid-rows-[1fr] lg:grid-rows-[0fr] lg:group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
                     <div className="overflow-hidden">
-                      <p className="text-[#94a3b8] text-sm leading-relaxed mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-75">
+                      <p className="text-[#94a3b8] text-sm leading-relaxed mt-2 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 delay-75">
                         {item.desc}
                       </p>
                     </div>
                   </div>
                 </div>
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -285,16 +246,11 @@ export default function Home() {
 
       {/* How to Book */}
       <section className="py-32 px-4 max-w-7xl mx-auto overflow-hidden">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.2, rotateZ: -10 }}
-          whileInView={{ opacity: 1, scale: 1, rotateZ: 0 }}
-          whileHover={{ scale: 1.05, rotateZ: 2 }}
-          viewport={{ once: false, margin: "-100px" }}
-          transition={{ duration: 1, type: "spring", bounce: 0.7 }}
+        <div
           className="text-center mb-20"
         >
           <h2 className="text-4xl md:text-5xl font-display font-bold text-navy-900 mb-6">Seamless Booking in 3 Steps</h2>
-        </motion.div>
+        </div>
         
         <div className="grid md:grid-cols-3 gap-12 relative">
           {/* Connector Line with Animated Car */}
@@ -316,26 +272,18 @@ export default function Home() {
             { step: "02", title: "Select Your Ride", desc: "Choose from our premium fleet of 500+ verified vehicles at transparent prices." },
             { step: "03", title: "Confirm & Travel", desc: "Receive instant confirmation and enjoy a safe, memorable journey with us." },
           ].map((item, i) => (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, x: i === 0 ? -150 : i === 2 ? 150 : 0, y: i === 1 ? 150 : 0, rotateY: 90, scale: 0.5 }}
-              whileInView={{ opacity: 1, x: 0, y: 0, rotateY: 0, scale: 1 }}
-              whileHover={{ scale: 1.15, rotate: i % 2 === 0 ? 5 : -5, z: 50, filter: "drop-shadow(0 20px 30px rgba(0,0,0,0.15))" }}
-              viewport={{ once: false, margin: "-50px" }}
-              transition={{ duration: 1.2, delay: i * 0.2, type: "spring", bounce: 0.6 }}
               className="relative z-10 text-center bg-transparent"
-              style={{ transformStyle: "preserve-3d", perspective: 1000 }}
             >
-              <motion.div 
-                whileHover={{ rotate: 360, scale: 1.2 }} 
-                transition={{ duration: 0.8, type: "spring", bounce: 0.5 }}
+              <div
                 className="w-20 h-20 mx-auto bg-navy-900 text-white rounded-full flex items-center justify-center text-2xl font-bold font-display mb-6 shadow-xl cursor-pointer"
               >
                 {item.step}
-              </motion.div>
+              </div>
               <h3 className="text-2xl font-display font-bold text-navy-900 mb-4">{item.title}</h3>
               <p className="text-navy-900/60 leading-relaxed">{item.desc}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </section>
@@ -346,3 +294,5 @@ export default function Home() {
     </main>
   );
 }
+
+
