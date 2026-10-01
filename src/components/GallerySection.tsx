@@ -135,17 +135,17 @@ export default function GallerySection() {
 
           {/* Right Text Content */}
           <div
-            className="w-full lg:w-1/4 flex flex-col justify-between h-[400px] z-10"
+            className="w-full lg:w-1/4 flex flex-col justify-between items-center lg:items-end h-auto lg:h-[400px] gap-8 lg:gap-0 z-10 mt-8 lg:mt-0 relative"
           >
-            <div className="text-right">
+            <div className="text-center lg:text-right">
               <h3 className="text-6xl md:text-8xl font-display font-bold text-ocean-500 opacity-80 mb-2">26+</h3>
               <p className="text-lg text-navy-900 font-medium">Years of Excellence & Trust</p>
             </div>
 
-            <div className="relative mt-auto text-right">
+            <div className="relative mt-auto text-center lg:text-right flex flex-col items-center lg:items-end">
               {/* Spinning Text Effect Approximation */}
-              <div className="absolute -top-24 right-0 w-32 h-32 animate-[spin_10s_linear_infinite] opacity-30 lg:opacity-100">
-                <svg viewBox="0 0 100 100" width="120" height="120">
+              <div className="relative lg:absolute lg:-top-24 lg:right-0 w-24 h-24 lg:w-32 lg:h-32 mb-4 lg:mb-0 animate-[spin_10s_linear_infinite] opacity-30 lg:opacity-100 self-center lg:self-end">
+                <svg viewBox="0 0 100 100" width="100%" height="100%">
                   <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
                   <text className="text-[10px] tracking-widest font-bold fill-navy-900/50 uppercase">
                     <textPath href="#circlePath">AST Solutions • Premium Travel •</textPath>
@@ -153,7 +153,7 @@ export default function GallerySection() {
                 </svg>
               </div>
 
-              <h4 className="text-2xl md:text-3xl font-display font-bold text-navy-900 mt-12">
+              <h4 className="text-3xl md:text-3xl font-display font-bold text-navy-900 lg:mt-12">
                 Where Every <span className="text-ocean-500">Ride</span> Tells a Story.
               </h4>
             </div>

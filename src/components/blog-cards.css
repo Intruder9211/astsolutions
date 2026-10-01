@@ -1,0 +1,197 @@
+.blogContainer {
+	color: var(--white);
+	line-height: 161.8%;
+}
+
+.blogContainer :is(h1, h2) {
+	color: var(--white);
+	width: fit-content;
+}
+.blogContainer h1 {
+	font-size: 1.8em;
+}
+.blogArticle {
+	width: 100%;
+	padding: 8px 24px;
+	margin: 0 auto;
+	font-weight: 400;
+	position: relative;
+	overflow: hidden;
+
+	border-bottom: 4px solid var(--ocean-500);
+	border-left: 4px solid var(--ocean-500);
+
+	background: var(--navy-900);
+	border-top-right-radius: 64px;
+}
+.blogArticle aside {
+	border-left: 4px solid var(--ocean-500);
+	padding-left: 16px;
+	margin-bottom: 16px;
+	line-height: 124%;
+}
+.blogArticle strong {
+	font-weight: 600;
+}
+.blogArticle a {
+	font-weight: 500;
+	color: var(--ocean-500);
+	text-decoration: none;
+	cursor: pointer;
+}
+.blogArticle a:hover {
+	text-decoration: underline;
+}
+.blogArticle .foot {
+	display: flex;
+	gap: 24px;
+	align-items: center;
+	flex-wrap: wrap;
+	padding-bottom: 16px;
+}
+.blogArticle .foot img {
+	max-width: 84px;
+	height: auto;
+	border: 4px solid var(--white);
+	border-top-color: var(--ocean-500);
+	border-right-color: var(--ocean-500);
+	object-fit: contain;
+}
+.blogArticle .author a {
+	font-weight: 600;
+}
+.blogArticle .author span {
+	font-size: 1.4em;
+	padding-right: 2px;
+	translate: 0 2px;
+	rotate: -33deg;
+	display: inline-block;
+	color: var(--coral-500);
+	transition: all 0.2s ease-in-out;
+}
+.blogArticle .author a:hover,
+.blogArticle .author a:hover span {
+	color: var(--ocean-500);
+	rotate: 0deg;
+}
+
+.featuredImage {
+	width: 100%;
+	height: 324px;
+	background-size: cover;
+	background-position: 50% 16.18%;
+	margin-top: 16px;
+	border-top-right-radius: 42px;
+	border-bottom: 4px solid var(--ocean-500);
+	position: relative;
+	z-index: 1;
+}
+.featuredImage .expand {
+	position: absolute;
+	right: 0px;
+	bottom: -4px;
+	color: var(--white);
+	cursor: pointer;
+	background: var(--navy-700);
+	border-top-left-radius: 32px;
+	width: 64px;
+	height: 64px;
+	border-left: 4px solid var(--ocean-500);
+	border-top: 4px solid var(--ocean-500);
+}
+.featuredImage .expand::before {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	transition: all 0.4s ease-in-out;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='%231F7A8C' viewBox='0 0 256 256'%3E%3Cpath d='M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z'%3E%3C/path%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 50%;
+}
+.featuredImage .expand.close::before {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='%231F7A8C' viewBox='0 0 256 256'%3E%3Cpath d='M228,128a12,12,0,0,1-12,12H40a12,12,0,0,1,0-24H216A12,12,0,0,1,228,128Z'%3E%3C/path%3E%3C/svg%3E");
+}
+.featuredImage .expand:hover::before {
+	rotate: 90deg;
+}
+.featuredImage .expand.close:hover::before {
+	rotate: 45deg;
+}
+
+.blogArticle h1 {
+	position: absolute;
+	margin: 0;
+	top: 0;
+	padding: 16px 22px 16px 0px;
+	background: var(--navy-700);
+	border-bottom-right-radius: 24px;
+	z-index: 2;
+	line-height: 100%;
+	color: var(--white) !important;
+}
+.blogArticle .date {
+	position: absolute;
+	margin: 0;
+	bottom: -28px;
+	padding: 0px 24px 8px 0px;
+	border-bottom-right-radius: 22px;
+	z-index: 2;
+	color: var(--white);
+	font-size: 16px;
+	font-weight: 400;
+	background: var(--navy-700);
+}
+
+.blogArticle .content {
+	transition: height 1s ease-out;
+	visibility: visible;
+	height: 0;
+	overflow: clip;
+}
+.blogArticle:has(.expand.close) .content {
+	transition: height 1s ease-in;
+	height: auto;
+}
+
+.dotmap {
+	width: 100%;
+	height: min(30vw, 200px);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background: linear-gradient(#fff0, #fff4, #fff0);
+	mask-image: url("https://assets.codepen.io/3421562/dotmap.svg");
+	position: relative;
+}
+.dotmap::before {
+	scale: 0;
+	opacity: 0;
+	transition: all 0.2s ease-out;
+	content: "";
+	display: block;
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	border-radius: 200px;
+	background: var(--ocean-500);
+	filter: blur(40px);
+	top: var(--y, 50%);
+	left: var(--x, 50%);
+	translate: -50% -50%;
+}
+.dotmap:hover::before {
+	scale: 1;
+	opacity: 1;
+}
+.dotmap::after {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: url("https://assets.codepen.io/3421562/dotmap_h.svg");
+	top: 0;
+	left: 0;
+}

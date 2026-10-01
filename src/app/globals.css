@@ -46,8 +46,8 @@
   
   --color-white: var(--white);
   
-  --font-display: var(--font-fraunces), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-body: var(--font-fraunces), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-display: "Fraunces", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   
   --radius-lg: var(--radius);
 }

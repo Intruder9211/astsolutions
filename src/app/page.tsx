@@ -1,14 +1,14 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Map, Users, Plane, Briefcase, Heart, CreditCard, Headphones, Car } from "lucide-react";
 import WhatWeOfferScroll from "@/components/WhatWeOfferScroll";
 import BestCabServices from "@/components/BestCabServices";
 import GallerySection from "@/components/GallerySection";
 import RoutesSection from "@/components/RoutesSection";
-
+import BlogsSection from "@/components/BlogsSection";
 const servicesList = [
   { icon: <Map className="text-[#3b82f6]" size={24} />, bg: "bg-[#3b82f6]/10", title: "Local & Outstation Cab Service", desc: "City rides, intercity trips and point-to-point transfers with verified drivers." },
   { icon: <Users className="text-[#22c55e]" size={24} />, bg: "bg-[#22c55e]/10", title: "Tempo Traveller & Urbania", desc: "Comfortable vehicles for family tours, pilgrimages, corporate trips and group travel." },
@@ -20,8 +20,24 @@ const servicesList = [
 ];
 
 export default function Home() {
-  
-  
+  const [titleIndex, setTitleIndex] = useState(0);
+
+  const heroTitles = [
+    { line1: "Explore More.", line2: "Live More." },
+    { line1: "Your Journey", line2: "Starts Here" },
+    { line1: "Discover the World,", line2: "Your Way" },
+    { line1: "Travel Beyond", line2: "the Ordinary" },
+    { line1: "Go Far.", line2: "Dream Bigger." },
+    { line1: "Where Every Journey", line2: "Becomes a Story" },
+    { line1: "Pack Your Bags.", line2: "Adventure Awaits." },
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTitleIndex((prev) => (prev + 1) % heroTitles.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
 
   
   
@@ -51,7 +67,7 @@ export default function Home() {
         <div 
           className="absolute inset-0 z-0"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.2)_0%,_rgba(0,0,0,0.95)_100%)] z-10" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.65)_0%,_rgba(0,0,0,1)_100%)] z-10" />
           <video 
             autoPlay 
             loop 
@@ -71,12 +87,21 @@ export default function Home() {
             Redefining Travel Across Pan-India
           </div>
           
-          <h1
-            className="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white leading-[1.1] tracking-tight mb-8 max-w-4xl"
-          >
-            Experience India in <br />
-            <span className="text-[#7b61ff] italic">Unmatched Comfort.</span>
-          </h1>
+          <div className="h-[100px] md:h-[160px] lg:h-[200px] flex items-center justify-center mb-8 w-full overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.h1
+                key={titleIndex}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.4 }}
+                className="text-[7.5vw] sm:text-[6vw] md:text-6xl lg:text-7xl font-display font-bold text-white leading-[1.2] tracking-tight w-full uppercase px-2"
+              >
+                <span className="block whitespace-nowrap">{heroTitles[titleIndex].line1}</span>
+                <span className="block whitespace-nowrap">{heroTitles[titleIndex].line2}</span>
+              </motion.h1>
+            </AnimatePresence>
+          </div>
           
           <p
             className="text-lg md:text-xl text-white/80 max-w-2xl mb-12 font-body"
@@ -90,8 +115,8 @@ export default function Home() {
             <a href="tel:+919717806764" className="bg-white text-navy-900 hover:bg-sand-100 font-medium px-8 py-4 rounded-full transition-colors duration-300">
               Call +91 9717806764
             </a>
-            <Link href="/fleet" className="bg-ocean-500 hover:bg-ocean-600 text-white font-medium px-8 py-4 rounded-full transition-colors duration-300 flex items-center justify-center gap-2">
-              Explore Fleet
+            <Link href="/cars" className="bg-ocean-500 hover:bg-ocean-600 text-white font-medium px-8 py-4 rounded-full transition-colors duration-300 flex items-center justify-center gap-2">
+              Explore Cars
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </Link>
           </div>
@@ -196,53 +221,8 @@ export default function Home() {
       {/* Cross-style Gallery Section */}
       <GallerySection />
 
-      {/* Offerings Grid */}
-      <section className="py-32 bg-[#050505] text-white px-4 border-t border-white/5">
-        <div className="max-w-7xl mx-auto">
-          <div
-            className="mb-20"
-          >
-            <h2 className="text-4xl md:text-6xl font-display font-medium tracking-tight mb-6">Built for every journey.</h2>
-            <p className="text-[#94a3b8] text-xl max-w-2xl">Reliable, world-class transport solutions designed perfectly around your itinerary.</p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {offerings.map((item, i) => (
-              <div
-                key={i}
-                className="group relative bg-[#0d0d0d] border border-white/5 rounded-[2rem] overflow-hidden flex flex-col h-[420px] shadow-[0_0_30px_rgba(0,0,0,0.5)] cursor-pointer"
-              >
-                <div className="w-full h-full relative">
-                {/* Spotlight Gradient - only on first card to mimic screenshot, or subtle on all */}
-                {i === 0 && (
-                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-50 z-0 pointer-events-none" />
-                )}
-                
-                {/* Top Visual Area (Image) */}
-                <div className="relative flex-1 w-full h-full border-b border-white/5 overflow-hidden">
-                  <div className="absolute inset-0 bg-[#0d0d0d]/40 group-hover:bg-transparent transition-colors duration-700 z-10 pointer-events-none"></div>
-                  <img src={item.image} alt={item.title} className="absolute inset-0 w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105" />
-                </div>
-
-                {/* Bottom Text Area */}
-                <div className="p-8 z-10 bg-[#0d0d0d] absolute bottom-0 w-full">
-                  <div className="transform transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-2">
-                    <h3 className="text-xl font-display font-medium tracking-tight text-white">{item.title}</h3>
-                  </div>
-                  <div className="grid grid-rows-[1fr] lg:grid-rows-[0fr] lg:group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                    <div className="overflow-hidden">
-                      <p className="text-[#94a3b8] text-sm leading-relaxed mt-2 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 delay-75">
-                        {item.desc}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Blogs Section */}
+      <BlogsSection />
 
       {/* How to Book */}
       <section className="py-32 px-4 max-w-7xl mx-auto overflow-hidden">

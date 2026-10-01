@@ -104,7 +104,7 @@ export default function AboutPage() {
             className="flex justify-between items-end mb-12 border-b border-[#1A1A1A]/10 pb-6"
           >
             <h2 className="text-4xl font-display font-medium">Our Diverse Fleet</h2>
-            <Link href="/fleet" className="hidden md:flex items-center gap-2 text-sm font-medium hover:opacity-70 transition-opacity">
+            <Link href="/cars" className="hidden md:flex items-center gap-2 text-sm font-medium hover:opacity-70 transition-opacity">
               View All Vehicles <ArrowUpRight size={16} />
             </Link>
           </motion.div>
